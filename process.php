@@ -24,7 +24,7 @@ foreach ($json->arrivals as $arrival) {
 		if ($dim < 0) {
 			$dim = 0;
 		}
-		echo "Next bus is due in $dim mins\n"; 
+		echo json_encode(array("Next"=>$dim)); 
 		if ($dim == 0) {
 			// Flashing White
 			$color = array();
@@ -32,7 +32,7 @@ foreach ($json->arrivals as $arrival) {
 			$color['on'] = true;
 			$color['hue'] =  30000;
 			$color['sat'] = 254;
-			$color['bri'] = 255;
+			$color['bri'] = 20;
 			$color['transitiontime'] = 1;
 			setLight(1, $color);
 			break;
