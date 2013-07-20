@@ -25,6 +25,24 @@
 	
 		<h2>Busbulb: the bus predicting lightbulb you've always wanted</h2>	
 		
+		<p>Bus Stop:</p>
+		
+		<p id="stop">
+			[Hardcoded -- Bango]
+		</p>
+		
+		<p>Route Indicated:</p>
+		
+		<p id="route">
+			[Hardcoded: 154]
+		</p>
+		
+		<p>Bus Stop ID:</p>
+		
+		<p id="stopid">
+			[Hardcoded -- Bingo]
+		</p>
+		
 		<p>Status:</p>
 		
 		<p id="status">
@@ -51,12 +69,15 @@
 					}
 				});
 			}
-			setInterval("dobuses()", 10000);
+			setInterval("dobuses()", 30000);
 			dobuses();
 			
-			n = 11;
+			n = 31;
 			function dosecs() {
 				n--;
+				if (n == 0) {
+					n = 30;
+				}
 				$('#secs').html(n + " seconds");
 			}
 			setInterval("dosecs()", 1000);
