@@ -1,3 +1,6 @@
+<?php
+$config = json_decode(file_get_contents("./config.json"));
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,38 +23,68 @@
 	        </ul>
 	  </div>
 	</div>
-
+	<style>
+	body {
+		background: -moz-linear-gradient(top, rgba(175,175,175,0.65) 0%, rgba(255,255,255,0) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(175,175,175,0.65)), color-stop(100%,rgba(255,255,255,0)));
+		background: -webkit-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: -o-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: -ms-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: linear-gradient(to bottom, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background-repeat: no-repeat;
+	}
+	</style>
     <div class="container">
 	
 		<h2>Busbulb: the bus predicting lightbulb you've always wanted</h2>	
 		
-		<p>Bus Stop:</p>
+		<div id="huehuehue"><div id="wink">Currently</div></div>
 		
-		<p id="stop">
-			[Hardcoded -- Bango]
+		<style>
+			#huehuehue {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				right: 10%;
+				background-color: transparent;
+				border-radius: 50px;
+				border: 3px solid silver;
+			}
+			#wink {
+				position: relative;
+				left: 21px;
+				top: 37px;
+			}
+			.header {
+				font-weight: bold;
+				font-size: 1.1em;
+			}
+			.astatus {
+				font-style: italic;
+			}
+		</style>
+		
+		<p class="header">Bus Stop:</p>
+		
+		<p class="astatus" id="stop">
+			<?php echo @$config->stopid; ?>
 		</p>
 		
-		<p>Route Indicated:</p>
+		<p class="header">Route Desired:</p>
 		
-		<p id="route">
-			[Hardcoded: 154]
+		<p class="astatus" id="route">
+			<?php echo @$config->route; ?>
 		</p>
 		
-		<p>Bus Stop ID:</p>
+		<p class="header">Status:</p>
 		
-		<p id="stopid">
-			[Hardcoded -- Bingo]
-		</p>
-		
-		<p>Status:</p>
-		
-		<p id="status">
+		<p class="astatus" id="status">
 			Updating...
 		</p>	
 		
-		<p>Next Updating:</p>
+		<p class="header">Next Updating:</p>
 		
-		<p id="secs">
+		<p class="astatus" id="secs">
 			Soon
 		</p>
 		
@@ -65,17 +98,17 @@
 					dataType: "json",
 					success: function(data) { 
 						next = "Next bus due in " + data['Next'] + " mins";
+						$("#huehuehue").css('background-color', data['Color']);
 						$('#status').html(next);
 					}
 				});
 			}
-			setInterval("dobuses()", 30000);
 			dobuses();
-			
 			n = 31;
 			function dosecs() {
 				n--;
 				if (n == 0) {
+					dobuses();
 					n = 30;
 				}
 				$('#secs').html(n + " seconds");

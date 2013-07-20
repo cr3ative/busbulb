@@ -10,11 +10,13 @@ require("hue.php");
 // Flashing white is due
 
 // First let's get the list of 154's due outside my house.
+$config = json_decode(file_get_contents("./config.json"));
 
-$json = json_decode(file_get_contents("http://countdown.tfl.gov.uk/stopBoard/53366/"));
+$json = json_decode(file_get_contents("http://countdown.tfl.gov.uk/stopBoard/".@$config->stopid."/"));
+
 foreach ($json->arrivals as $arrival) {
 
-	if ($arrival->routeId == "154") {
+	if ($arrival->routeId == @$config->route) {
 		// The first is always the latest due, so just read it straight off!
 		$howlong = $arrival->estimatedWait;
 		if ($howlong == "due") { $howlong = "0min";	}
@@ -24,9 +26,9 @@ foreach ($json->arrivals as $arrival) {
 		if ($dim < 0) {
 			$dim = 0;
 		}
-		echo json_encode(array("Next"=>$dim)); 
 		if ($dim == 0) {
 			// Flashing White
+			$col = "#ebe8e8";
 			$color = array();
 			$color['alert'] =  "lselect";
 			$color['on'] = true;
@@ -39,6 +41,7 @@ foreach ($json->arrivals as $arrival) {
 		}
 		if ($dim < 4) {
 			// Blue
+			$col = "#6a6af2";
 			$color = array();
 			$color['hue'] =  46920;
 			$color['on'] = true;
@@ -50,6 +53,7 @@ foreach ($json->arrivals as $arrival) {
 		}
 		if ($dim < 9) {
 			// Yellow
+			$col = "#f5d332";
 			$color = array();
 			$color['hue'] =  19000;
 			$color['on'] = true;
@@ -61,6 +65,7 @@ foreach ($json->arrivals as $arrival) {
 		}
 		// Further than 8 mins away.
 		// Red
+		$col = "#e45c5c";
 		$color = array();
 		$color['on'] =  true;
 		$color['hue'] =  0;
@@ -72,5 +77,5 @@ foreach ($json->arrivals as $arrival) {
 	}
 	
 }
-
+echo json_encode(array("Next"=>$dim,"Color"=>$col)); 
 ?>
