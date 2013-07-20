@@ -77,5 +77,13 @@ foreach ($json->arrivals as $arrival) {
 	}
 	
 }
+
+if (!isset($dim)) {
+	echo json_encode(array("Error"=>"No services found"));
+	$color['on'] =  false;
+	setLight(1, $color);
+	die(); 
+}
+
 echo json_encode(array("Next"=>$dim,"Color"=>$col)); 
 ?>

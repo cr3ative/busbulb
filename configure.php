@@ -5,6 +5,7 @@ if (isset($_POST['stopid'])) {
 	$str = json_encode($_POST);
 	$file = 'config.json';
 	$status = file_put_contents($file, $str);
+	header("Location:index.php?c=s");
 }
 
 $config = json_decode(file_get_contents("./config.json"));
@@ -16,7 +17,8 @@ $config = json_decode(file_get_contents("./config.json"));
   <head>
     <meta charset="utf-8">
     <title>Busbulb</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--[if lt IE 9]>
@@ -25,7 +27,8 @@ $config = json_decode(file_get_contents("./config.json"));
   </head>
 
   <body>
-	<div class="navbar navbar-upper">
+  	<br/>
+	<div class="navbar">
 	  <div class="navbar-inner">
 	    <ul class="nav">
 	          <li><a href="index.php">Home</a></li>
@@ -33,6 +36,18 @@ $config = json_decode(file_get_contents("./config.json"));
 	        </ul>
 	  </div>
 	</div>
+	
+	<style>
+	body {
+		background: -moz-linear-gradient(top, rgba(175,175,175,0.65) 0%, rgba(255,255,255,0) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(175,175,175,0.65)), color-stop(100%,rgba(255,255,255,0)));
+		background: -webkit-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: -o-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: -ms-linear-gradient(top, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background: linear-gradient(to bottom, rgba(175,175,175,0.65) 0%,rgba(255,255,255,0) 100%);
+		background-repeat: no-repeat;
+	}
+	</style>
 
     <div class="container">
 	
@@ -57,6 +72,18 @@ $config = json_decode(file_get_contents("./config.json"));
 		</form>
 		
     </div>
+    
+    <script>
+    var a=document.getElementsByTagName("a");
+    for(var i=0;i<a.length;i++)
+    {
+        a[i].onclick=function()
+        {
+            window.location=this.getAttribute("href");
+            return false
+        }
+    }
+    </script>
     
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
 
