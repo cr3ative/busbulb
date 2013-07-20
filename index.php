@@ -5,7 +5,7 @@ $config = json_decode(file_get_contents("./config.json"));
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Busbulb</title>
+    <title>BusBulb App</title>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@ $config = json_decode(file_get_contents("./config.json"));
 	</style>
     <div class="container">
 	
-		<h2>Busbulb</h2>
+		<h2>BusBulb</h2>
 		
 		<h4><i>"A lightbulb which predicts buses is completely game changing" - Gizmodo</i></h4>	
 		
@@ -119,6 +119,19 @@ $config = json_decode(file_get_contents("./config.json"));
 			
 			<p class="astatus" id="secs">
 				Soon
+			</p>
+			
+			<Br/>
+			
+			<hr>
+			
+			<p class="header">How to read BusBulb</p>
+			
+			<p>
+			<b>Red</b> is over 8 mins away. Get a cup of tea.<br/>
+			<b>Yellow</b> is fairly close, under 8 mins. Put your shoes on.<br/>
+			<b>Blue</b> is 4 mins or less. Get to the bus stop.<br/>
+			<b>Flashing white</b> means the bus is due. RUN!<br/>
 			</p>
 		
 		</div>

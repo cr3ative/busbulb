@@ -39,7 +39,7 @@ foreach ($json->arrivals as $arrival) {
 			setLight(1, $color);
 			break;
 		}
-		if ($dim < 4) {
+		if ($dim < 5) {
 			// Blue
 			$col = "#6a6af2";
 			$color = array();

@@ -16,7 +16,7 @@ $config = json_decode(file_get_contents("./config.json"));
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Busbulb</title>
+    <title>BusBulb Configure</title>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@ $config = json_decode(file_get_contents("./config.json"));
 	
 		<h2>Configure Busbulb</h2>	
 		
-		<h4>You'll find your Stop ID and Route on TFL Countdown: <a href="http://countdown.tfl.gov.uk/">Go there!</a></h4>
+		<h4>You'll find your Stop ID and Route on TFL Countdown: <a href="http://countdown.tfl.gov.uk/">Let's do it!</a></h4>
 		
 		<form class="form" method="POST" action="configure.php">
 		
@@ -79,8 +79,10 @@ $config = json_decode(file_get_contents("./config.json"));
     {
         a[i].onclick=function()
         {
-            window.location=this.getAttribute("href");
-            return false
+        	if (this.getAttribute("href") != "http://countdown.tfl.gov.uk/") {
+	            window.location=this.getAttribute("href");
+	            return false
+        	}
         }
     }
     </script>
